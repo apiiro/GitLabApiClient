@@ -94,6 +94,31 @@ namespace GitLabApiClient
             return await _httpFacade.GetPagedList<Issue>(url);
         }
 
+        public async Task<IList<Issue>> GetPageAsync(
+            ProjectId projectId = null,
+            GroupId groupId = null,
+            Action<IssuesQueryOptions> options = null,
+            int page = 1,
+            int perPage = GitLabApiPagedRequestor.MaxItemsPerPage)
+        {
+            var queryOptions = new IssuesQueryOptions();
+            options?.Invoke(queryOptions);
+
+            string path = "issues";
+            if (projectId != null)
+            {
+                path = $"projects/{projectId}/issues";
+            }
+            else if (groupId != null)
+            {
+                path = $"groups/{groupId}/issues";
+            }
+
+            string url = _queryBuilder.Build(path, queryOptions);
+
+            return await _httpFacade.GetListSinglePage<Issue>(url, page, perPage);
+        }
+
         /// <summary>
         /// Retrieves project issue.
         /// </summary>
