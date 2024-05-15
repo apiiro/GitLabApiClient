@@ -6,7 +6,7 @@ namespace GitLabApiClient.Models;
 public abstract class Account
 {
     [JsonProperty("id")]
-    public int Id { get; set; }
+    public long Id { get; set; }
 
     [JsonProperty("state")]
     public string State { get; set; }
