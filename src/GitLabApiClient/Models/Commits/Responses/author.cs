@@ -6,7 +6,7 @@ namespace GitLabApiClient.Models.Commits.Responses
     public sealed class Author
     {
         [JsonProperty("id")]
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         [JsonProperty("state")]
         public string State { get; set; }

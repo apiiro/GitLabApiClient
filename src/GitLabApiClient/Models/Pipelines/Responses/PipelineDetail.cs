@@ -6,7 +6,7 @@ namespace GitLabApiClient.Models.Pipelines.Responses
     public class PipelineDetail
     {
         [JsonProperty("id")]
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         [JsonProperty("sha")]
         public string Sha { get; set; }

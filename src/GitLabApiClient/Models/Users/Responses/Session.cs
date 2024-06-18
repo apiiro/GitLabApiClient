@@ -40,7 +40,7 @@ namespace GitLabApiClient.Models.Users.Responses
         public List<Identity> Identities { get; } = new List<Identity>();
 
         [JsonProperty("id")]
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         [JsonProperty("is_admin")]
         public bool IsAdmin { get; set; }

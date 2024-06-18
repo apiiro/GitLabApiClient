@@ -6,7 +6,7 @@ namespace GitLabApiClient.Models.Projects.Responses
     public sealed class Owner
     {
         [JsonProperty("id")]
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         [JsonProperty("created_at")]
         public DateTime CreatedAt { get; set; }
