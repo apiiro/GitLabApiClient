@@ -5,7 +5,7 @@ namespace GitLabApiClient.Models.Projects.Responses
     public sealed class ExportStatus
     {
         [JsonProperty("id")]
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         [JsonProperty("created_at")]
         public string CreatedAt { get; set; }

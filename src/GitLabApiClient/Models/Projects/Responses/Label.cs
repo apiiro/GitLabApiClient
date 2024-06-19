@@ -5,7 +5,7 @@ namespace GitLabApiClient.Models.Projects.Responses
     public sealed class Label
     {
         [JsonProperty("id")]
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         [JsonProperty("name")]
         public string Name { get; set; }

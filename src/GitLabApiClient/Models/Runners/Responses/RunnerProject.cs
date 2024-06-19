@@ -5,7 +5,7 @@ namespace GitLabApiClient.Models.Runners.Responses
     public sealed class RunnerProject
     {
         [JsonProperty("id")]
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         [JsonProperty("name")]
         public string Name { get; set; }

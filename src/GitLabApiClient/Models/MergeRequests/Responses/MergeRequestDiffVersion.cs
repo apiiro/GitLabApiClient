@@ -7,7 +7,7 @@ namespace GitLabApiClient.Models.MergeRequests.Responses;
 public class MergeRequestDiffVersion
 {
     [JsonProperty("id")]
-    public int Id { get; set; }
+    public long Id { get; set; }
 
     [JsonProperty("head_commit_sha")]
     public string HeadCommitSha { get; set; }
