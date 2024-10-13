@@ -106,7 +106,7 @@ namespace GitLabApiClient
             var queryOptions = new JobQueryOptions();
             options?.Invoke(queryOptions);
 
-            var url = _jobQueryBuilder.Build($"projects/{projectId}/jobs", queryOptions);
+            string url = _jobQueryBuilder.Build($"projects/{projectId}/jobs", queryOptions);
             return await _httpFacade.GetPagedList<Job>(url);
         }
 
@@ -115,7 +115,7 @@ namespace GitLabApiClient
         /// </summary>
         /// <param name="projectId">The ID, path or <see cref="Project"/> of the project.</param>
         /// <param name="milestoneId">Id of the milestone.</param>
-        public async Task<Milestone> GetMilestoneAsync(ProjectId projectId, int milestoneId) =>
+        public async Task<Milestone> GetMilestoneAsync(ProjectId projectId, long milestoneId) =>
             await _httpFacade.Get<Milestone>($"projects/{projectId}/milestones/{milestoneId}");
 
         /// <summary>
@@ -203,7 +203,7 @@ namespace GitLabApiClient
         /// <param name="milestoneId">The ID of a project milestone.</param>
         /// <param name="request">Update milestone request.</param>
         /// <returns>Newly modified milestone.</returns>
-        public async Task<Milestone> UpdateMilestoneAsync(ProjectId projectId, int milestoneId, UpdateProjectMilestoneRequest request)
+        public async Task<Milestone> UpdateMilestoneAsync(ProjectId projectId, long milestoneId, UpdateProjectMilestoneRequest request)
         {
             Guard.NotNull(request, nameof(request));
             return await _httpFacade.Put<Milestone>($"projects/{projectId}/milestones/{milestoneId}", request);

@@ -21,7 +21,7 @@ namespace GitLabApiClient.Test
     public class GroupsClientTest
     {
         private readonly List<int> _groupIdsToClean = new List<int>();
-        private List<int> MilestoneIdsToClean { get; } = new List<int>();
+        private List<long> MilestoneIdsToClean { get; } = new List<long>();
         private List<string> VariableIdsToClean { get; } = new List<string>();
 
         private readonly GroupsClient _sut = new GroupsClient(

@@ -31,7 +31,7 @@ namespace GitLabApiClient.Internal.Paths
             if (!string.IsNullOrEmpty(projectPath))
                 return new ProjectId(projectPath.UrlEncode());
 
-            int id = project.Id;
+            long id = project.Id;
             if (id > 0)
                 return new ProjectId(id.ToString());
 

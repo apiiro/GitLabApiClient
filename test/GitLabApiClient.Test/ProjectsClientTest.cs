@@ -21,8 +21,8 @@ namespace GitLabApiClient.Test
     [Collection("GitLabContainerFixture")]
     public class ProjectsClientTest : IAsyncLifetime
     {
-        private List<int> ProjectIdsToClean { get; } = new List<int>();
-        private List<int> MilestoneIdsToClean { get; } = new List<int>();
+        private List<long> ProjectIdsToClean { get; } = new List<long>();
+        private List<long> MilestoneIdsToClean { get; } = new List<long>();
         private List<string> VariableIdsToClean { get; } = new List<string>();
 
         private readonly ProjectsClient _sut = new ProjectsClient(
@@ -386,7 +386,7 @@ namespace GitLabApiClient.Test
 
             status.Status.Should().Be(ExportStatusEnum.Finished);
 
-            var path = System.IO.Path.GetTempFileName();
+            string path = System.IO.Path.GetTempFileName();
             await _sut.ExportDownloadAsync(GitLabApiHelper.TestProjectId, path);
 
             System.IO.File.Exists(path).Should().BeTrue();

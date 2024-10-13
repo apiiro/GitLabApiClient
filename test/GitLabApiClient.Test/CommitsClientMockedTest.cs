@@ -105,8 +105,8 @@ namespace GitLabApiClient.Test
             string gitlabServer = "http://fake-gitlab.com/";
             string projectId = "id";
             string sha = "6104942438c14ec7bd21c6cd5bd995272b3faff6";
-            string Name = "name1";
-            string url = $"/projects/id/repository/commits/{sha}/statuses?name={Name}&per_page=100&page=1";
+            string name = "name1";
+            string url = $"/projects/id/repository/commits/{sha}/statuses?name={name}&per_page=100&page=1";
 
             var handler = A.Fake<MockHandler>(opt => opt.CallsBaseMethods());
             A.CallTo(() => handler.SendAsync(HttpMethod.Get, url))
@@ -117,7 +117,7 @@ namespace GitLabApiClient.Test
                 var gitlabHttpFacade = new GitLabHttpFacade(new RequestsJsonSerializer(), client);
                 var commitsClient = new CommitsClient(gitlabHttpFacade, new CommitQueryBuilder(), new CommitRefsQueryBuilder(), new CommitStatusesQueryBuilder());
 
-                var statusesFromClient = await commitsClient.GetStatusesAsync(projectId, sha, o => o.Name = Name);
+                var statusesFromClient = await commitsClient.GetStatusesAsync(projectId, sha, o => o.Name = name);
                 statusesFromClient[0].Status.Should().BeEquivalentTo("success");
                 statusesFromClient[0].Name.Should().BeEquivalentTo("name1");
                 statusesFromClient[0].TargetUrl.Should().BeEquivalentTo("target_url1");
