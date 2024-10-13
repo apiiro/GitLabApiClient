@@ -53,7 +53,7 @@ namespace GitLabApiClient
         /// <summary>
         /// Retrieves project issue.
         /// </summary>
-        Task<Issue> GetAsync(ProjectId projectId, int issueId);
+        Task<Issue> GetAsync(ProjectId projectId, long issueId);
 
         /// <summary>
         /// Retrieves issues from a project.
@@ -81,7 +81,7 @@ namespace GitLabApiClient
         /// <param name="issueIid">Iid of the issue.</param>
         /// <param name="noteId">Id of the note.</param>
         /// <returns>Issues satisfying options.</returns>
-        Task<Note> GetNoteAsync(ProjectId projectId, int issueIid, int noteId);
+        Task<Note> GetNoteAsync(ProjectId projectId, long issueIid, long noteId);
 
         /// <summary>
         /// Retrieves notes (comments) of an issue.
@@ -90,7 +90,7 @@ namespace GitLabApiClient
         /// <param name="issueIid">Iid of the issue.</param>
         /// <param name="options">IssueNotes retrieval options.</param>
         /// <returns>Issues satisfying options.</returns>
-        Task<IList<Note>> GetNotesAsync(ProjectId projectId, int issueIid, Action<IssueNotesQueryOptions> options = null);
+        Task<IList<Note>> GetNotesAsync(ProjectId projectId, long issueIid, Action<IssueNotesQueryOptions> options = null);
 
         /// <summary>
         /// Creates new issue.
@@ -107,7 +107,7 @@ namespace GitLabApiClient
         /// <param name="projectId">The ID, path or <see cref="Project"/> of the project.</param>
         /// <param name="issueIid">The IID of an issue.</param>
         /// <param name="request">Create issue note request.</param>
-        Task<Note> CreateNoteAsync(ProjectId projectId, int issueIid, CreateIssueNoteRequest request);
+        Task<Note> CreateNoteAsync(ProjectId projectId, long issueIid, CreateIssueNoteRequest request);
 
         /// <summary>
         /// Updated existing issue.
@@ -116,7 +116,7 @@ namespace GitLabApiClient
         /// <param name="projectId">The ID, path or <see cref="Project"/> of the project.</param>
         /// <param name="issueIid">The IID of an issue.</param>
         /// <param name="request">Update issue request.</param>
-        Task<Issue> UpdateAsync(ProjectId projectId, int issueIid, UpdateIssueRequest request);
+        Task<Issue> UpdateAsync(ProjectId projectId, long issueIid, UpdateIssueRequest request);
 
         /// <summary>
         /// Modify existing note (comment) of an issue.
@@ -126,7 +126,7 @@ namespace GitLabApiClient
         /// <param name="issueIid">The IID of an issue.</param>
         /// <param name="noteId">The ID of a note.</param>
         /// <param name="request">Update issue note request.</param>
-        Task<Note> UpdateNoteAsync(ProjectId projectId, int issueIid, int noteId, UpdateIssueNoteRequest request);
+        Task<Note> UpdateNoteAsync(ProjectId projectId, long issueIid, long noteId, UpdateIssueNoteRequest request);
 
         /// <summary>
         /// Deletes an existing note (comment) of an issue.
