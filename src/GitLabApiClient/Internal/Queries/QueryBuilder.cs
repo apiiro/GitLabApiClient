@@ -39,7 +39,7 @@ namespace GitLabApiClient.Internal.Queries
                     Add($"{name}[]", val.ToString());
             }
 
-            public void Add(IList<int> values)
+            public void Add(IList<long> values)
             {
                 foreach (int iid in values)
                     Add("iids[]", iid.ToString());
@@ -47,7 +47,7 @@ namespace GitLabApiClient.Internal.Queries
 
             public string ToQueryString()
             {
-                var array = _nameValues.AllKeys.SelectMany(
+                string[] array = _nameValues.AllKeys.SelectMany(
                         key => _nameValues.GetValues(key)
                             ?.Select(value => $"{key.UrlEncode()}={value.UrlEncode()}")
                     )

@@ -100,7 +100,7 @@ namespace GitLabApiClient
         /// <param name="projectId">The ID, path or <see cref="Project"/> of the project.</param>
         /// <param name="mergeRequestId">The Internal Merge Request Id.</param>
         /// <param name="request">Update Merge request.</param>
-        public async Task<MergeRequest> UpdateAsync(ProjectId projectId, int mergeRequestId, UpdateMergeRequest request) =>
+        public async Task<MergeRequest> UpdateAsync(ProjectId projectId, long mergeRequestId, UpdateMergeRequest request) =>
             await _httpFacade.Put<MergeRequest>($"projects/{projectId}/merge_requests/{mergeRequestId}", request);
 
         /// <summary>
@@ -110,7 +110,7 @@ namespace GitLabApiClient
         /// /// <param name="projectId">The ID, path or <see cref="Project"/> of the project.</param>
         /// <param name="mergeRequestId">The Internal Merge Request Id.</param>
         /// <param name="request">Accept Merge request.</param>
-        public async Task<MergeRequest> AcceptAsync(ProjectId projectId, int mergeRequestId, AcceptMergeRequest request)
+        public async Task<MergeRequest> AcceptAsync(ProjectId projectId, long mergeRequestId, AcceptMergeRequest request)
         {
             return await _httpFacade.Put<MergeRequest>(
                 $"projects/{projectId}/merge_requests/{mergeRequestId}/merge", request);
@@ -121,7 +121,7 @@ namespace GitLabApiClient
         /// </summary>
         /// <param name="projectId">The ID, path or <see cref="Project"/> of the project.</param>
         /// <param name="mergeRequestId">The Internal Merge Request Id.</param>
-        public async Task DeleteAsync(ProjectId projectId, int mergeRequestId) =>
+        public async Task DeleteAsync(ProjectId projectId, long mergeRequestId) =>
             await _httpFacade.Delete($"projects/{projectId}/merge_requests/{mergeRequestId}");
 
         /// <summary>

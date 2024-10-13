@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using FluentAssertions;
 using GitLabApiClient.Internal.Queries;
 using GitLabApiClient.Models;
@@ -18,7 +19,7 @@ namespace GitLabApiClient.Test.Internal.Queries
                 "https://gitlab.com/api/v4/merge_requests",
                 new ProjectMergeRequestsQueryOptions()
                 {
-                    MergeRequestsIds = new[] { 4, 5 },
+                    MergeRequestsIds = new List<long> { 4, 5 },
                     State = QueryMergeRequestState.Opened,
                     Order = MergeRequestsOrder.UpdatedAt,
                     SortOrder = SortOrder.Ascending,

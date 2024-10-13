@@ -43,7 +43,7 @@ namespace GitLabApiClient.Models.Projects.Responses
         public int ForksCount { get; set; }
 
         [JsonProperty("id")]
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         [JsonProperty("issues_enabled")]
         public bool IssuesEnabled { get; set; }

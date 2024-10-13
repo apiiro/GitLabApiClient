@@ -17,8 +17,8 @@ namespace GitLabApiClient.Test
     [Collection("GitLabContainerFixture")]
     public class ToDoListClientTest : IAsyncLifetime
     {
-        private readonly MergeRequestsClient mergeRequestsClient = new MergeRequestsClient(GitLabApiHelper.GetFacade(), new MergeRequestsQueryBuilder(), new ProjectMergeRequestsQueryBuilder(), new ProjectMergeRequestsNotesQueryBuilder());
-        private readonly IssuesClient issuesClient = new IssuesClient(GitLabApiHelper.GetFacade(), new IssuesQueryBuilder(), new ProjectIssueNotesQueryBuilder());
+        private readonly MergeRequestsClient _mergeRequestsClient = new MergeRequestsClient(GitLabApiHelper.GetFacade(), new MergeRequestsQueryBuilder(), new ProjectMergeRequestsQueryBuilder(), new ProjectMergeRequestsNotesQueryBuilder());
+        private readonly IssuesClient _issuesClient = new IssuesClient(GitLabApiHelper.GetFacade(), new IssuesQueryBuilder(), new ProjectIssueNotesQueryBuilder());
 
 
         private readonly ToDoListClient _sut = new ToDoListClient(
@@ -28,12 +28,12 @@ namespace GitLabApiClient.Test
         [Fact]
         public async Task RetrieveToDoListAndMarkAsDone()
         {
-            var mergeRequest = await mergeRequestsClient.CreateAsync(GitLabApiHelper.TestProjectTextId, new CreateMergeRequest("sourcebranch1", "master", "Title")
+            var mergeRequest = await _mergeRequestsClient.CreateAsync(GitLabApiHelper.TestProjectTextId, new CreateMergeRequest("sourcebranch1", "master", "Title")
             {
                 AssigneeId = GitLabApiHelper.TestUserId
             });
 
-            var issue = await issuesClient.CreateAsync(GitLabApiHelper.TestProjectTextId, new CreateIssueRequest("IssueTitle")
+            var issue = await _issuesClient.CreateAsync(GitLabApiHelper.TestProjectTextId, new CreateIssueRequest("IssueTitle")
             {
                 Assignees = new List<int> { GitLabApiHelper.TestUserId }
             });
@@ -66,17 +66,17 @@ namespace GitLabApiClient.Test
 
         private async Task QuerySetupToDosAsync()
         {
-            _ = await mergeRequestsClient.CreateAsync(GitLabApiHelper.TestProjectTextId, new CreateMergeRequest("sourcebranch1", "master", "Title")
+            _ = await _mergeRequestsClient.CreateAsync(GitLabApiHelper.TestProjectTextId, new CreateMergeRequest("sourcebranch1", "master", "Title")
             {
                 AssigneeId = GitLabApiHelper.TestUserId
             });
 
-            _ = await issuesClient.CreateAsync(GitLabApiHelper.TestProjectTextId, new CreateIssueRequest("IssueTitle1")
+            _ = await _issuesClient.CreateAsync(GitLabApiHelper.TestProjectTextId, new CreateIssueRequest("IssueTitle1")
             {
                 Assignees = new List<int> { GitLabApiHelper.TestUserId }
             });
 
-            _ = await issuesClient.CreateAsync(GitLabApiHelper.TestProjectTextId, new CreateIssueRequest("IssueTitle2")
+            _ = await _issuesClient.CreateAsync(GitLabApiHelper.TestProjectTextId, new CreateIssueRequest("IssueTitle2")
             {
                 Description = $"@{GitLabApiHelper.TestUserName}"
             });
@@ -138,9 +138,9 @@ namespace GitLabApiClient.Test
 
         private async Task DeleteAllMergeRequests()
         {
-            var mergeRequests = await mergeRequestsClient.GetAsync(GitLabApiHelper.TestProjectId);
+            var mergeRequests = await _mergeRequestsClient.GetAsync(GitLabApiHelper.TestProjectId);
             await Task.WhenAll(mergeRequests.Select(
-                m => mergeRequestsClient.DeleteAsync(GitLabApiHelper.TestProjectId, m.Iid)));
+                m => _mergeRequestsClient.DeleteAsync(GitLabApiHelper.TestProjectId, m.Iid)));
         }
     }
 }
