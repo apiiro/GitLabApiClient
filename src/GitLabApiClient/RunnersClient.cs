@@ -47,7 +47,7 @@ namespace GitLabApiClient
         /// <param name="runnerId">Id of the runner.</param>
         /// <param name="request">Request to update runner.</param>
         /// <returns>Newly modified user.</returns>
-        public async Task<Runner> UpdateAsync(int runnerId, UpdateRunnerRequest request) =>
+        public async Task<Runner> UpdateAsync(long runnerId, UpdateRunnerRequest request) =>
             await _httpFacade.Put<Runner>($"runners/{runnerId}", request);
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace GitLabApiClient
         /// Deletes a runner.
         /// </summary>
         /// <param name="runnerId">Id of the runner.</param>
-        public async Task DeleteAsync(int runnerId) =>
+        public async Task DeleteAsync(long runnerId) =>
             await _httpFacade.Delete($"runners/{runnerId}");
 
         /// <summary>
