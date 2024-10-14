@@ -90,7 +90,8 @@ namespace GitLabApiClient
         /// <param name="issueIid">Iid of the issue.</param>
         /// <param name="options">IssueNotes retrieval options.</param>
         /// <returns>Issues satisfying options.</returns>
-        Task<IList<Note>> GetNotesAsync(ProjectId projectId, int issueIid, Action<IssueNotesQueryOptions> options = null);
+        Task<IList<Note>> GetNotesAsync(ProjectId projectId, long issueIid,
+            Action<IssueNotesQueryOptions> options = null);
 
         /// <summary>
         /// Creates new issue.
