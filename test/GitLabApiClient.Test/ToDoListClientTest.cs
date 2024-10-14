@@ -35,7 +35,7 @@ namespace GitLabApiClient.Test
 
             var issue = await issuesClient.CreateAsync(GitLabApiHelper.TestProjectTextId, new CreateIssueRequest("IssueTitle")
             {
-                Assignees = new List<int> { GitLabApiHelper.TestUserId }
+                Assignees = [GitLabApiHelper.TestUserId]
             });
 
             // todoList is populated
@@ -73,7 +73,7 @@ namespace GitLabApiClient.Test
 
             _ = await issuesClient.CreateAsync(GitLabApiHelper.TestProjectTextId, new CreateIssueRequest("IssueTitle1")
             {
-                Assignees = new List<int> { GitLabApiHelper.TestUserId }
+                Assignees = [GitLabApiHelper.TestUserId]
             });
 
             _ = await issuesClient.CreateAsync(GitLabApiHelper.TestProjectTextId, new CreateIssueRequest("IssueTitle2")
