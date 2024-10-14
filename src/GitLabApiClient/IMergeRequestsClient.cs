@@ -55,23 +55,24 @@ namespace GitLabApiClient
         /// <param name="projectId">The ID, path or <see cref="Project"/> of the project.</param>
         /// <param name="mergeRequestId">The Internal Merge Request Id.</param>
         /// <param name="request">Update Merge request.</param>
-        Task<MergeRequest> UpdateAsync(ProjectId projectId, int mergeRequestId, UpdateMergeRequest request);
+        Task<MergeRequest> UpdateAsync(ProjectId projectId, long mergeRequestId, UpdateMergeRequest request);
 
         /// <summary>
         /// Accepts merge request.
         /// </summary>
         /// <returns>The accepted merge request.</returns>
-        /// /// <param name="projectId">The ID, path or <see cref="Project"/> of the project.</param>
+        /// ///
+        /// <param name="projectId">The ID, path or <see cref="Project"/> of the project.</param>
         /// <param name="mergeRequestId">The Internal Merge Request Id.</param>
         /// <param name="request">Accept Merge request.</param>
-        Task<MergeRequest> AcceptAsync(ProjectId projectId, int mergeRequestId, AcceptMergeRequest request);
+        Task<MergeRequest> AcceptAsync(ProjectId projectId, long mergeRequestId, AcceptMergeRequest request);
 
         /// <summary>
         /// Deletes merge request.
         /// </summary>
         /// <param name="projectId">The ID, path or <see cref="Project"/> of the project.</param>
         /// <param name="mergeRequestId">The Internal Merge Request Id.</param>
-        Task DeleteAsync(ProjectId projectId, int mergeRequestId);
+        Task DeleteAsync(ProjectId projectId, long mergeRequestId);
 
         /// <summary>
         /// Creates a new note (comment) to a single Merge Request.

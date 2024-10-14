@@ -11,7 +11,7 @@ namespace GitLabApiClient.Models.Runners.Responses
         public string Description { get; set; }
 
         [JsonProperty("id")]
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         [JsonProperty("is_shared")]
         public bool IsShared { get; set; }

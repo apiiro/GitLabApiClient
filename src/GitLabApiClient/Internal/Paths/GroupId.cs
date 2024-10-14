@@ -20,7 +20,7 @@ namespace GitLabApiClient.Internal.Paths
             return new GroupId(groupPath.UrlEncode());
         }
 
-        public static implicit operator GroupId(int groupId)
+        public static implicit operator GroupId(long groupId)
         {
             return new GroupId(groupId.ToString());
         }
@@ -31,7 +31,7 @@ namespace GitLabApiClient.Internal.Paths
             if (!string.IsNullOrEmpty(groupPath))
                 return new GroupId(groupPath.UrlEncode());
 
-            int id = group.Id;
+            long id = group.Id;
             if (id > 0)
                 return new GroupId(id.ToString());
 

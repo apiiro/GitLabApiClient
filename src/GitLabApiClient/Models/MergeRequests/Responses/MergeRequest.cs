@@ -52,13 +52,13 @@ namespace GitLabApiClient.Models.MergeRequests.Responses
         public bool? ShouldRemoveSourceBranch { get; set; }
 
         [JsonProperty("target_project_id")]
-        public int TargetProjectId { get; set; }
+        public long TargetProjectId { get; set; }
 
         [JsonProperty("state")]
         public MergeRequestState State { get; set; }
 
         [JsonProperty("source_project_id")]
-        public int SourceProjectId { get; set; }
+        public long SourceProjectId { get; set; }
 
         [JsonProperty("closed_at")]
         public DateTime? ClosedAt { get; set; }

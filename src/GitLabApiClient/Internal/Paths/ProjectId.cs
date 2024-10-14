@@ -20,7 +20,7 @@ namespace GitLabApiClient.Internal.Paths
             return new ProjectId(projectPath.UrlEncode());
         }
 
-        public static implicit operator ProjectId(int projectId)
+        public static implicit operator ProjectId(long projectId)
         {
             return new ProjectId(projectId.ToString());
         }
@@ -31,7 +31,7 @@ namespace GitLabApiClient.Internal.Paths
             if (!string.IsNullOrEmpty(projectPath))
                 return new ProjectId(projectPath.UrlEncode());
 
-            int id = project.Id;
+            long id = project.Id;
             if (id > 0)
                 return new ProjectId(id.ToString());
 
