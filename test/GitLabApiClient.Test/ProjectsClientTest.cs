@@ -21,8 +21,8 @@ namespace GitLabApiClient.Test
     [Collection("GitLabContainerFixture")]
     public class ProjectsClientTest : IAsyncLifetime
     {
-        private List<int> ProjectIdsToClean { get; } = new List<int>();
-        private List<int> MilestoneIdsToClean { get; } = new List<int>();
+        private List<long> ProjectIdsToClean { get; } = [];
+        private List<long> MilestoneIdsToClean { get; } = [];
         private List<string> VariableIdsToClean { get; } = new List<string>();
 
         private readonly ProjectsClient _sut = new ProjectsClient(

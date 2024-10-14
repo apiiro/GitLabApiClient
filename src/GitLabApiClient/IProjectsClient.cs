@@ -97,7 +97,7 @@ namespace GitLabApiClient
         /// </summary>
         /// <param name="projectId">The ID, path or <see cref="Project"/> of the project.</param>
         /// <param name="milestoneId">Id of the milestone.</param>
-        Task<Milestone> GetMilestoneAsync(ProjectId projectId, int milestoneId);
+        Task<Milestone> GetMilestoneAsync(ProjectId projectId, long milestoneId);
 
         /// <summary>
         /// Get the runners list of a project.
@@ -159,7 +159,8 @@ namespace GitLabApiClient
         /// <param name="milestoneId">The ID of a project milestone.</param>
         /// <param name="request">Update milestone request.</param>
         /// <returns>Newly modified milestone.</returns>
-        Task<Milestone> UpdateMilestoneAsync(ProjectId projectId, int milestoneId, UpdateProjectMilestoneRequest request);
+        Task<Milestone> UpdateMilestoneAsync(ProjectId projectId, long milestoneId,
+            UpdateProjectMilestoneRequest request);
 
         /// <summary>
         /// Updates an existing project variable.

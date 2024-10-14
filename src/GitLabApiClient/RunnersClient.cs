@@ -36,7 +36,7 @@ namespace GitLabApiClient
         /// </summary>
         /// <param name="runnerId">Id of the runner.</param>
         /// <returns>Runner or NULL if it was not found.</returns>
-        public async Task<RunnerDetails> GetAsync(int runnerId)
+        public async Task<RunnerDetails> GetAsync(long runnerId)
         {
             return (await _httpFacade.Get<RunnerDetails>($"runners/{runnerId}"));
         }

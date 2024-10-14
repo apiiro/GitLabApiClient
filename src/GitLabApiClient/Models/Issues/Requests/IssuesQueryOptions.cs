@@ -58,7 +58,7 @@ namespace GitLabApiClient.Models.Issues.Requests
         /// <summary>
         /// Return only the issues having the given iid.
         /// </summary>
-        public IList<int> IssueIds { get; set; } = new List<int>();
+        public IList<long> IssueIds { get; set; } = new List<long>();
 
         /// <summary>
         /// Specifies issues order. Default is Creation time.

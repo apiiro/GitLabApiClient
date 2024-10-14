@@ -22,7 +22,7 @@ namespace GitLabApiClient
         /// </summary>
         /// <param name="runnerId">Id of the runner.</param>
         /// <returns>Runner or NULL if it was not found.</returns>
-        Task<RunnerDetails> GetAsync(int runnerId);
+        Task<RunnerDetails> GetAsync(long runnerId);
 
         /// <summary>
         /// Updates existing runner
