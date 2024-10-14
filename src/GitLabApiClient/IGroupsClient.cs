@@ -86,7 +86,7 @@ namespace GitLabApiClient
         /// </summary>
         /// <param name="groupId">The ID, path or <see cref="Group"/> of the group.</param>
         /// <param name="milestoneId">Id of the milestone.</param>
-        Task<Milestone> GetMilestoneAsync(GroupId groupId, long milestoneId);
+        Task<Milestone> GetMilestoneAsync(GroupId groupId, int milestoneId);
 
         /// <summary>
         /// Get a list of runners in a group.
@@ -150,7 +150,7 @@ namespace GitLabApiClient
         /// <param name="milestoneId">The ID of the group's milestone.</param>
         /// <param name="request">Update milestone request.</param>
         /// <returns>Newly modified milestone.</returns>
-        Task<Milestone> UpdateMilestoneAsync(GroupId groupId, long milestoneId, UpdateGroupMilestoneRequest request);
+        Task<Milestone> UpdateMilestoneAsync(GroupId groupId, int milestoneId, UpdateGroupMilestoneRequest request);
 
         /// <summary>
         /// Removes group with all projects inside.

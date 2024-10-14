@@ -8,10 +8,10 @@ namespace GitLabApiClient.Models
         internal ModifiableObject() { }
 
         [JsonProperty("iid")]
-        public long Iid { get; set; }
+        public int Iid { get; set; }
 
         [JsonProperty("id")]
-        public long Id { get; set; }
+        public int Id { get; set; }
 
         [JsonProperty("created_at")]
         public DateTime CreatedAt { get; set; }

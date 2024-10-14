@@ -16,9 +16,9 @@ namespace GitLabApiClient.Test.Internal.Queries
 
             string query = sut.Build(
                 "https://gitlab.com/api/v4/merge_requests",
-                new ProjectMergeRequestsQueryOptions
+                new ProjectMergeRequestsQueryOptions()
                 {
-                    MergeRequestsIds =  { 4, 5 },
+                    MergeRequestsIds = new[] { 4, 5 },
                     State = QueryMergeRequestState.Opened,
                     Order = MergeRequestsOrder.UpdatedAt,
                     SortOrder = SortOrder.Ascending,

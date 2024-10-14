@@ -5,10 +5,10 @@ namespace GitLabApiClient.Models.Notes.Responses
     public sealed class Note : ModifiableObject
     {
         [JsonProperty("noteable_id")]
-        public long NoteableId { get; set; }
+        public int NoteableId { get; set; }
 
         [JsonProperty("noteable_iid")]
-        public long NoteableIid { get; set; }
+        public int NoteableIid { get; set; }
 
         [JsonProperty("noteable_type")]
         public string NoteableType { get; set; }

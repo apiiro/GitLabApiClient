@@ -97,7 +97,7 @@ namespace GitLabApiClient
         /// <summary>
         /// Retrieves project issue.
         /// </summary>
-        public async Task<Issue> GetAsync(ProjectId projectId, long issueId) =>
+        public async Task<Issue> GetAsync(ProjectId projectId, int issueId) =>
             await _httpFacade.Get<Issue>($"projects/{projectId}/issues/{issueId}");
 
         /// <summary>
@@ -128,7 +128,7 @@ namespace GitLabApiClient
         /// <param name="issueIid">Iid of the issue.</param>
         /// <param name="noteId">Id of the note.</param>
         /// <returns>Issues satisfying options.</returns>
-        public async Task<Note> GetNoteAsync(ProjectId projectId, long issueIid, long noteId) =>
+        public async Task<Note> GetNoteAsync(ProjectId projectId, int issueIid, int noteId) =>
             await _httpFacade.Get<Note>($"projects/{projectId}/issues/{issueIid}/notes/{noteId}");
 
         /// <summary>
@@ -138,8 +138,7 @@ namespace GitLabApiClient
         /// <param name="issueIid">Iid of the issue.</param>
         /// <param name="options">IssueNotes retrieval options.</param>
         /// <returns>Notes satisfying options.</returns>
-        public async Task<IList<Note>> GetNotesAsync(ProjectId projectId, long issueIid,
-            Action<IssueNotesQueryOptions> options = null)
+        public async Task<IList<Note>> GetNotesAsync(ProjectId projectId, int issueIid, Action<IssueNotesQueryOptions> options = null)
         {
             var queryOptions = new IssueNotesQueryOptions();
             options?.Invoke(queryOptions);
@@ -164,7 +163,7 @@ namespace GitLabApiClient
         /// <param name="projectId">The ID, path or <see cref="Project"/> of the project.</param>
         /// <param name="issueIid">The IID of an issue.</param>
         /// <param name="request">Create issue note request.</param>
-        public async Task<Note> CreateNoteAsync(ProjectId projectId, long issueIid, CreateIssueNoteRequest request) =>
+        public async Task<Note> CreateNoteAsync(ProjectId projectId, int issueIid, CreateIssueNoteRequest request) =>
             await _httpFacade.Post<Note>($"projects/{projectId}/issues/{issueIid}/notes", request);
 
         /// <summary>
@@ -174,7 +173,7 @@ namespace GitLabApiClient
         /// <param name="projectId">The ID, path or <see cref="Project"/> of the project.</param>
         /// <param name="issueIid">The IID of an issue.</param>
         /// <param name="request">Update issue request.</param>
-        public async Task<Issue> UpdateAsync(ProjectId projectId, long issueIid, UpdateIssueRequest request) =>
+        public async Task<Issue> UpdateAsync(ProjectId projectId, int issueIid, UpdateIssueRequest request) =>
             await _httpFacade.Put<Issue>($"projects/{projectId}/issues/{issueIid}", request);
 
         /// <summary>
@@ -185,8 +184,7 @@ namespace GitLabApiClient
         /// <param name="issueIid">The IID of an issue.</param>
         /// <param name="noteId">The ID of a note.</param>
         /// <param name="request">Update issue note request.</param>
-        public async Task<Note> UpdateNoteAsync(ProjectId projectId, long issueIid, long noteId,
-            UpdateIssueNoteRequest request) =>
+        public async Task<Note> UpdateNoteAsync(ProjectId projectId, int issueIid, int noteId, UpdateIssueNoteRequest request) =>
             await _httpFacade.Put<Note>($"projects/{projectId}/issues/{issueIid}/notes/{noteId}", request);
 
         /// <summary>

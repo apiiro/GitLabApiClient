@@ -18,6 +18,6 @@ namespace GitLabApiClient.Models.MergeRequests.Requests
         /// <summary>
         /// Return the request having the given ids.
         /// </summary>
-        public IList<long> MergeRequestsIds { get; set; } = new List<long>();
+        public IList<int> MergeRequestsIds { get; set; } = new List<int>();
     }
 }
