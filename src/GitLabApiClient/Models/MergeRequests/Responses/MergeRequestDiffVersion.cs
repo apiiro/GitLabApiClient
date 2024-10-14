@@ -22,7 +22,7 @@ public class MergeRequestDiffVersion
     public DateTime CreatedAt { get; set; }
 
     [JsonProperty("merge_request_id")]
-    public int MergeRequestId { get; set; }
+    public long MergeRequestId { get; set; }
 
     [JsonProperty("state")]
     public string State { get; set; }

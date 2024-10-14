@@ -25,7 +25,7 @@ namespace GitLabApiClient.Models.Users.Responses
         public DateTime CreatedAt { get; set; }
 
         [JsonProperty("color_scheme_id")]
-        public int ColorSchemeId { get; set; }
+        public long ColorSchemeId { get; set; }
 
         [JsonProperty("current_sign_in_at")]
         public string CurrentSignInAt { get; set; }

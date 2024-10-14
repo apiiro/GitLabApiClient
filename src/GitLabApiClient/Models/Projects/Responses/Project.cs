@@ -25,7 +25,7 @@ namespace GitLabApiClient.Models.Projects.Responses
         public string AvatarUrl { get; set; }
 
         [JsonProperty("creator_id")]
-        public int CreatorId { get; set; }
+        public long CreatorId { get; set; }
 
         [JsonProperty("created_at")]
         public string CreatedAt { get; set; }
