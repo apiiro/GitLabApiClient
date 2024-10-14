@@ -138,7 +138,8 @@ namespace GitLabApiClient
         /// <param name="issueIid">Iid of the issue.</param>
         /// <param name="options">IssueNotes retrieval options.</param>
         /// <returns>Notes satisfying options.</returns>
-        public async Task<IList<Note>> GetNotesAsync(ProjectId projectId, int issueIid, Action<IssueNotesQueryOptions> options = null)
+        public async Task<IList<Note>> GetNotesAsync(ProjectId projectId, long issueIid,
+            Action<IssueNotesQueryOptions> options = null)
         {
             var queryOptions = new IssueNotesQueryOptions();
             options?.Invoke(queryOptions);

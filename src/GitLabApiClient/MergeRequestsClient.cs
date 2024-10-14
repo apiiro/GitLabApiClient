@@ -141,7 +141,7 @@ namespace GitLabApiClient
         /// <param name="mergeRequestIid">Iid of the merge request.</param>
         /// <param name="options">MergeRequestNotes retrieval options.</param>
         /// <returns>Merge requests satisfying options.</returns>
-        public async Task<IList<Note>> GetNotesAsync(ProjectId projectId, int mergeRequestIid, Action<MergeRequestNotesQueryOptions> options = null)
+        public async Task<IList<Note>> GetNotesAsync(ProjectId projectId, long mergeRequestIid, Action<MergeRequestNotesQueryOptions> options = null)
         {
             var queryOptions = new MergeRequestNotesQueryOptions();
             options?.Invoke(queryOptions);
