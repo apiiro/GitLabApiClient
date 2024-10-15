@@ -22,7 +22,7 @@ namespace GitLabApiClient
         /// </summary>
         /// <param name="runnerId">Id of the runner.</param>
         /// <returns>Runner or NULL if it was not found.</returns>
-        Task<RunnerDetails> GetAsync(long runnerId);
+        Task<RunnerDetails> GetAsync(int runnerId);
 
         /// <summary>
         /// Updates existing runner
@@ -30,7 +30,7 @@ namespace GitLabApiClient
         /// <param name="runnerId">Id of the runner.</param>
         /// <param name="request">Request to update runner.</param>
         /// <returns>Newly modified runner.</returns>
-        Task<Runner> UpdateAsync(long runnerId, UpdateRunnerRequest request);
+        Task<Runner> UpdateAsync(int runnerId, UpdateRunnerRequest request);
 
         /// <summary>
         /// Creates a new runner registration.
@@ -43,7 +43,7 @@ namespace GitLabApiClient
         /// Deletes a runner.
         /// </summary>
         /// <param name="runnerId">Id of the runner.</param>
-        Task DeleteAsync(long runnerId);
+        Task DeleteAsync(int runnerId);
 
         /// <summary>
         /// Deletes a runner.

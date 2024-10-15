@@ -55,24 +55,23 @@ namespace GitLabApiClient
         /// <param name="projectId">The ID, path or <see cref="Project"/> of the project.</param>
         /// <param name="mergeRequestId">The Internal Merge Request Id.</param>
         /// <param name="request">Update Merge request.</param>
-        Task<MergeRequest> UpdateAsync(ProjectId projectId, long mergeRequestId, UpdateMergeRequest request);
+        Task<MergeRequest> UpdateAsync(ProjectId projectId, int mergeRequestId, UpdateMergeRequest request);
 
         /// <summary>
         /// Accepts merge request.
         /// </summary>
         /// <returns>The accepted merge request.</returns>
-        /// ///
-        /// <param name="projectId">The ID, path or <see cref="Project"/> of the project.</param>
+        /// /// <param name="projectId">The ID, path or <see cref="Project"/> of the project.</param>
         /// <param name="mergeRequestId">The Internal Merge Request Id.</param>
         /// <param name="request">Accept Merge request.</param>
-        Task<MergeRequest> AcceptAsync(ProjectId projectId, long mergeRequestId, AcceptMergeRequest request);
+        Task<MergeRequest> AcceptAsync(ProjectId projectId, int mergeRequestId, AcceptMergeRequest request);
 
         /// <summary>
         /// Deletes merge request.
         /// </summary>
         /// <param name="projectId">The ID, path or <see cref="Project"/> of the project.</param>
         /// <param name="mergeRequestId">The Internal Merge Request Id.</param>
-        Task DeleteAsync(ProjectId projectId, long mergeRequestId);
+        Task DeleteAsync(ProjectId projectId, int mergeRequestId);
 
         /// <summary>
         /// Creates a new note (comment) to a single Merge Request.
@@ -90,7 +89,8 @@ namespace GitLabApiClient
         /// <param name="mergeRequestIid">Iid of the merge request.</param>
         /// <param name="options">MergeRequestNotes retrieval options.</param>
         /// <returns>Merge requests satisfying options.</returns>
-        Task<IList<Note>> GetNotesAsync(ProjectId projectId, int mergeRequestIid, Action<MergeRequestNotesQueryOptions> options = null);
+        Task<IList<Note>> GetNotesAsync(ProjectId projectId, long mergeRequestIid,
+            Action<MergeRequestNotesQueryOptions> options = null);
 
         /// <summary>
         /// List erge request pipelines
@@ -119,6 +119,6 @@ namespace GitLabApiClient
         /// </summary>
         /// <param name="projectId">The ID, path or <see cref="Project"/> of the project.</param>
         /// <param name="mergeRequestIid">The Internal Merge Request Id.</param>
-        Task<IList<MergeRequestDiffVersion>> GetDiffVersionsAsync(ProjectId projectId, long mergeRequestIid);
+        Task<IList<MergeRequestDiffVersion>> GetDiffVersionsAsync(ProjectId projectId, int mergeRequestIid);
     }
 }

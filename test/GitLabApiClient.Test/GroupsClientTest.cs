@@ -20,8 +20,8 @@ namespace GitLabApiClient.Test
     [Collection("GitLabContainerFixture")]
     public class GroupsClientTest
     {
-        private readonly List<long> _groupIdsToClean = [];
-        private List<long> MilestoneIdsToClean { get; } = [];
+        private readonly List<int> _groupIdsToClean = new List<int>();
+        private List<int> MilestoneIdsToClean { get; } = new List<int>();
         private List<string> VariableIdsToClean { get; } = new List<string>();
 
         private readonly GroupsClient _sut = new GroupsClient(

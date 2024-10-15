@@ -27,7 +27,7 @@ namespace GitLabApiClient.Models.Users.Responses
         public string ConfirmedAt { get; set; }
 
         [JsonProperty("color_scheme_id")]
-        public long ColorSchemeId { get; set; }
+        public int ColorSchemeId { get; set; }
 
         [JsonProperty("created_at")]
         public string CreatedAt { get; set; }
@@ -42,7 +42,7 @@ namespace GitLabApiClient.Models.Users.Responses
         public string Email { get; set; }
 
         [JsonProperty("id")]
-        public long Id { get; set; }
+        public int Id { get; set; }
 
         [JsonProperty("last_activity_on")]
         public string LastActivityOn { get; set; }

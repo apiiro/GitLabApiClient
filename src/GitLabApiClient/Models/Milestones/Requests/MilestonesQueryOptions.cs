@@ -13,7 +13,7 @@ namespace GitLabApiClient.Models.Milestones.Requests
         /// <summary>
         /// Return only the milestones having the given iid.
         /// </summary>
-        public IList<long> MilestoneIds { get; set; } = new List<long>();
+        public IList<int> MilestoneIds { get; set; } = new List<int>();
 
         /// <summary>
         /// Return only active or closed milestones.

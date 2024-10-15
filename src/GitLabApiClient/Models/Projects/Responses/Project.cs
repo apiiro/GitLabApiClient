@@ -25,7 +25,7 @@ namespace GitLabApiClient.Models.Projects.Responses
         public string AvatarUrl { get; set; }
 
         [JsonProperty("creator_id")]
-        public long CreatorId { get; set; }
+        public int CreatorId { get; set; }
 
         [JsonProperty("created_at")]
         public string CreatedAt { get; set; }
@@ -43,7 +43,7 @@ namespace GitLabApiClient.Models.Projects.Responses
         public int ForksCount { get; set; }
 
         [JsonProperty("id")]
-        public long Id { get; set; }
+        public int Id { get; set; }
 
         [JsonProperty("issues_enabled")]
         public bool IssuesEnabled { get; set; }

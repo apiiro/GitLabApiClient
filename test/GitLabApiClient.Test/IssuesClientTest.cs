@@ -27,10 +27,10 @@ namespace GitLabApiClient.Test
             //arrange
             var createdIssue = await _sut.CreateAsync(TestProjectTextId, new CreateIssueRequest("Title1")
             {
-                Assignees = [1],
+                Assignees = new List<int> { 1 },
                 Confidential = true,
                 Description = "Description1",
-                Labels = { "Label1" },
+                Labels = new[] { "Label1" },
                 MilestoneId = 2,
                 DiscussionToResolveId = 3,
                 MergeRequestIdToResolveDiscussions = 4
@@ -97,7 +97,7 @@ namespace GitLabApiClient.Test
 
             var issue = await _sut.CreateAsync(TestProjectTextId, new CreateIssueRequest(title)
             {
-                Assignees = [1],
+                Assignees = new List<int> { 1 },
                 Confidential = true,
                 Description = "Description",
                 Labels = new List<string> { "Label1" }

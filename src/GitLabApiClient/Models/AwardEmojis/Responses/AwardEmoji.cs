@@ -22,7 +22,7 @@ namespace GitLabApiClient.Models.AwardEmojis.Responses
         public DateTime UpdatedAt { get; set; }
 
         [JsonProperty("awardable_id")]
-        public long AwardableId { get; set; }
+        public int AwardableId { get; set; }
 
         [JsonProperty("awardable_type")]
         public AwardableType AwardableType { get; set; }

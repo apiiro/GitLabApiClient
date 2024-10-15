@@ -16,7 +16,7 @@ namespace GitLabApiClient.Internal.Paths
 
         public static implicit operator UserId(User user)
         {
-            long id = user.Id;
+            int id = user.Id;
             if (id > 0)
                 return new UserId(id.ToString());
 

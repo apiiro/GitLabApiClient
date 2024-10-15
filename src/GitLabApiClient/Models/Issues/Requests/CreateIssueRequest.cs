@@ -43,7 +43,7 @@ namespace GitLabApiClient.Models.Issues.Requests
         /// The IDs of the users to assign issue.
         /// </summary>
         [JsonProperty("assignee_ids")]
-        public List<long> Assignees { get; set; } = new List<long>();
+        public List<int> Assignees { get; set; } = new List<int>();
 
         /// <summary>
         /// The ID of a milestone to assign issue.

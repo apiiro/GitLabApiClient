@@ -39,9 +39,9 @@ namespace GitLabApiClient.Internal.Queries
                     Add($"{name}[]", val.ToString());
             }
 
-            public void Add(IList<long> values)
+            public void Add(IList<int> values)
             {
-                foreach (long iid in values)
+                foreach (int iid in values)
                     Add("iids[]", iid.ToString());
             }
 
