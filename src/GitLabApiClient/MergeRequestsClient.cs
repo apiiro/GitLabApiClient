@@ -131,7 +131,7 @@ namespace GitLabApiClient
         /// <param name="projectId">The ID, path or <see cref="Project"/> of the project.</param>
         /// <param name="mergeRequestId">The IID of an Merge Request.</param>
         /// <param name="request">Create Merge Request note request.</param>
-        public async Task<Note> CreateNoteAsync(ProjectId projectId, int mergeRequestId, CreateMergeRequestNoteRequest request) =>
+        public async Task<Note> CreateNoteAsync(ProjectId projectId, long mergeRequestId, CreateMergeRequestNoteRequest request) =>
             await _httpFacade.Post<Note>($"projects/{projectId}/merge_requests/{mergeRequestId}/notes", request);
 
         /// <summary>

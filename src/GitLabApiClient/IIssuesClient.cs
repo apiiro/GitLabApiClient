@@ -108,7 +108,7 @@ namespace GitLabApiClient
         /// <param name="projectId">The ID, path or <see cref="Project"/> of the project.</param>
         /// <param name="issueIid">The IID of an issue.</param>
         /// <param name="request">Create issue note request.</param>
-        Task<Note> CreateNoteAsync(ProjectId projectId, int issueIid, CreateIssueNoteRequest request);
+        Task<Note> CreateNoteAsync(ProjectId projectId, long issueIid, CreateIssueNoteRequest request);
 
         /// <summary>
         /// Updated existing issue.

@@ -80,7 +80,7 @@ namespace GitLabApiClient
         /// <param name="projectId">The ID, path or <see cref="Project"/> of the project.</param>
         /// <param name="mergeRequestId">The IID of an Merge Request.</param>
         /// <param name="request">Create Merge Request note request.</param>
-        Task<Note> CreateNoteAsync(ProjectId projectId, int mergeRequestId, CreateMergeRequestNoteRequest request);
+        Task<Note> CreateNoteAsync(ProjectId projectId, long mergeRequestId, CreateMergeRequestNoteRequest request);
 
         /// <summary>
         /// Retrieves notes (comments) of a merge request.
