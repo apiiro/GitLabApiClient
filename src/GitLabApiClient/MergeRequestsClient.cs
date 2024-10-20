@@ -100,7 +100,8 @@ namespace GitLabApiClient
         /// <param name="projectId">The ID, path or <see cref="Project"/> of the project.</param>
         /// <param name="mergeRequestId">The Internal Merge Request Id.</param>
         /// <param name="request">Update Merge request.</param>
-        public async Task<MergeRequest> UpdateAsync(ProjectId projectId, int mergeRequestId, UpdateMergeRequest request) =>
+        public async Task<MergeRequest> UpdateAsync(ProjectId projectId, long mergeRequestId,
+            UpdateMergeRequest request) =>
             await _httpFacade.Put<MergeRequest>($"projects/{projectId}/merge_requests/{mergeRequestId}", request);
 
         /// <summary>
