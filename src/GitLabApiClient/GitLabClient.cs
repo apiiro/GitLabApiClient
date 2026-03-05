@@ -29,7 +29,7 @@ namespace GitLabApiClient
         {
             Guard.NotEmpty(hostUrl, nameof(hostUrl));
             Guard.NotNull(authenticationToken, nameof(authenticationToken));
-            HostUrl = FixBaseUrl(hostUrl);
+            HostUrl = FixBaseUrl(hostUrl, false);
 
             var jsonSerializer = new RequestsJsonSerializer();
 
@@ -56,13 +56,7 @@ namespace GitLabApiClient
             Guard.NotNull(httpClient.BaseAddress, nameof(httpClient.BaseAddress));
             Guard.NotNull(authenticationToken, nameof(authenticationToken));
 
-            var baseAddress = httpClient.BaseAddress!.ToString().TrimEnd('/');
-            if (!baseAddress.EndsWith("/api/v4", StringComparison.OrdinalIgnoreCase))
-                throw new ArgumentException(
-                    "HttpClient.BaseAddress must point to the GitLab API v4 endpoint (e.g. https://gitlab.example.com/api/v4/).",
-                    nameof(httpClient));
-
-            HostUrl = baseAddress + "/";
+            HostUrl = FixBaseUrl(httpClient.BaseAddress!.ToString(), true);
 
             var jsonSerializer = new RequestsJsonSerializer();
 
@@ -229,12 +223,21 @@ namespace GitLabApiClient
 
         public async Task<Metadata> GetMetadata() => await _httpFacade.Get<Metadata>("metadata");
 
-        public static string FixBaseUrl(string url)
+        public static string FixBaseUrl(string url, bool throwIfNotValid)
         {
             url = url.TrimEnd('/');
 
             if (!url.EndsWith("/api/v4", StringComparison.OrdinalIgnoreCase))
+            {
+                if (throwIfNotValid)
+                {
+                    throw new ArgumentException(
+                        "Host url must point to the GitLab API v4 endpoint (e.g. https://gitlab.example.com/api/v4/).",
+                        nameof(url));
+                }
+
                 url += "/api/v4";
+            }
 
             return url + "/";
         }
