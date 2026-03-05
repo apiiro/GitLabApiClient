@@ -29,7 +29,7 @@ namespace GitLabApiClient
         {
             Guard.NotEmpty(hostUrl, nameof(hostUrl));
             Guard.NotNull(authenticationToken, nameof(authenticationToken));
-            HostUrl = FixBaseUrl(hostUrl);
+            HostUrl = FixBaseUrl(hostUrl, false);
 
             var jsonSerializer = new RequestsJsonSerializer();
 
@@ -40,6 +40,33 @@ namespace GitLabApiClient
                 httpMessageHandler,
                 clientTimeout);
 
+            InitializeClients();
+        }
+
+        /// <summary>
+        /// Creates a new instance of the GitLab API v4 client using a pre-configured <see cref="HttpClient"/>.
+        /// The provided HttpClient must have its BaseAddress set to the GitLab API v4 endpoint
+        /// (e.g. https://gitlab.example.com/api/v4/).
+        /// </summary>
+        /// <param name="httpClient">A pre-configured HttpClient instance. Must have BaseAddress set.</param>
+        /// <param name="authenticationToken">Personal access token. Obtained from GitLab profile settings.</param>
+        public GitLabClient(HttpClient httpClient, string authenticationToken = "")
+        {
+            Guard.NotNull(httpClient, nameof(httpClient));
+            Guard.NotNull(httpClient.BaseAddress, nameof(httpClient.BaseAddress));
+            Guard.NotNull(authenticationToken, nameof(authenticationToken));
+
+            HostUrl = FixBaseUrl(httpClient.BaseAddress!.ToString(), true);
+
+            var jsonSerializer = new RequestsJsonSerializer();
+
+            _httpFacade = new GitLabHttpFacade(httpClient, jsonSerializer, authenticationToken);
+
+            InitializeClients();
+        }
+
+        private void InitializeClients()
+        {
             var projectQueryBuilder = new ProjectsQueryBuilder();
             var projectIssueNotesQueryBuilder = new ProjectIssueNotesQueryBuilder();
             var projectMergeRequestsNotesQueryBuilder = new ProjectMergeRequestsNotesQueryBuilder();
@@ -85,92 +112,92 @@ namespace GitLabApiClient
         /// <summary>
         /// Access GitLab's issues API.
         /// </summary>
-        public IIssuesClient Issues { get; }
+        public IIssuesClient Issues { get; private set; }
 
         /// <summary>
         /// Access GitLab's uploads API.
         /// </summary>
-        public IUploadsClient Uploads { get; }
+        public IUploadsClient Uploads { get; private set; }
 
         /// <summary>
         /// Access GitLab's merge requests API.
         /// </summary>
-        public IMergeRequestsClient MergeRequests { get; }
+        public IMergeRequestsClient MergeRequests { get; private set; }
 
         /// <summary>
         /// Access GitLab's projects API.
         /// </summary>
-        public IProjectsClient Projects { get; }
+        public IProjectsClient Projects { get; private set; }
 
         /// <summary>
         /// Access GitLab's users API.
         /// </summary>
-        public IUsersClient Users { get; }
+        public IUsersClient Users { get; private set; }
 
         /// <summary>
         /// Access GitLab's groups API.
         /// </summary>
-        public IGroupsClient Groups { get; }
+        public IGroupsClient Groups { get; private set; }
 
         /// <summary>
         /// Access GitLab's branches API.
         /// </summary>
-        public IBranchClient Branches { get; }
+        public IBranchClient Branches { get; private set; }
 
         /// <summary>
         /// Access GitLab's release API.
         /// </summary>
-        public IReleaseClient Releases { get; }
+        public IReleaseClient Releases { get; private set; }
 
         /// <summary>
         /// Access GitLab's tags API.
         /// </summary>
-        public ITagClient Tags { get; }
+        public ITagClient Tags { get; private set; }
 
         /// <summary>
         /// Access GitLab's webhook API.
         /// </summary>
-        public IWebhookClient Webhooks { get; }
+        public IWebhookClient Webhooks { get; private set; }
 
         /// <summary>
         /// Access GitLab's commits API.
         /// </summary>
-        public ICommitsClient Commits { get; }
+        public ICommitsClient Commits { get; private set; }
 
         /// <summary>
         /// Access GitLab's trees API.
         /// </summary>
-        public ITreesClient Trees { get; }
+        public ITreesClient Trees { get; private set; }
 
         /// <summary>
         /// Access GitLab's files API.
         /// </summary>
-        public IFilesClient Files { get; }
+        public IFilesClient Files { get; private set; }
 
         /// <summary>
         /// Access GitLab's Markdown API.
         /// </summary>
-        public IMarkdownClient Markdown { get; }
+        public IMarkdownClient Markdown { get; private set; }
 
         /// <summary>
         /// Acess GitLab's Pipeline API.
         /// </summary>
-        public IPipelineClient Pipelines { get; }
+        public IPipelineClient Pipelines { get; private set; }
 
         /// <summary>
         /// Access GitLab's Runners API.
         /// </summary>
-        public IRunnersClient Runners { get; }
+        public IRunnersClient Runners { get; private set; }
 
         /// <summary>
         /// Access GitLab's ToDo-List API.
         /// </summary>
-        public IToDoListClient ToDoList { get; }
+        public IToDoListClient ToDoList { get; private set; }
 
         /// <summary>
         /// Provides a client connection to make rest requests to HTTP endpoints.
         /// </summary>
-        public ConnectionClient Connection { get; }
+        public ConnectionClient Connection { get; private set; }
 
         /// <summary>
         /// Host address of GitLab instance. For example https://gitlab.example.com or https://gitlab.example.com/api/v4/.
@@ -196,12 +223,21 @@ namespace GitLabApiClient
 
         public async Task<Metadata> GetMetadata() => await _httpFacade.Get<Metadata>("metadata");
 
-        private static string FixBaseUrl(string url)
+        public static string FixBaseUrl(string url, bool throwIfNotValid)
         {
             url = url.TrimEnd('/');
 
             if (!url.EndsWith("/api/v4", StringComparison.OrdinalIgnoreCase))
+            {
+                if (throwIfNotValid)
+                {
+                    throw new ArgumentException(
+                        "Host url must point to the GitLab API v4 endpoint (e.g. https://gitlab.example.com/api/v4/).",
+                        nameof(url));
+                }
+
                 url += "/api/v4";
+            }
 
             return url + "/";
         }

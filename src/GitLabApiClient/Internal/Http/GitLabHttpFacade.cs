@@ -31,7 +31,23 @@ namespace GitLabApiClient.Internal.Http
         }
 
         public GitLabHttpFacade(string hostUrl, RequestsJsonSerializer jsonSerializer, string authenticationToken = "", HttpMessageHandler httpMessageHandler = null, TimeSpan? clientTimeout = null) :
-            this(hostUrl, jsonSerializer, httpMessageHandler, clientTimeout)
+            this(hostUrl, jsonSerializer, httpMessageHandler, clientTimeout) =>
+            ConfigureAuthentication(authenticationToken);
+
+        public GitLabHttpFacade(RequestsJsonSerializer jsonSerializer, HttpClient httpClient)
+        {
+            _httpClient = httpClient;
+            Setup(jsonSerializer);
+        }
+
+        public GitLabHttpFacade(HttpClient httpClient, RequestsJsonSerializer jsonSerializer, string authenticationToken)
+        {
+            _httpClient = httpClient;
+            ConfigureAuthentication(authenticationToken);
+            Setup(jsonSerializer);
+        }
+
+        private void ConfigureAuthentication(string authenticationToken)
         {
             switch (authenticationToken.Length)
             {
@@ -46,12 +62,6 @@ namespace GitLabApiClient.Internal.Http
                 default:
                     throw new ArgumentException("Unsupported authentication token provide, please private an oauth or private token");
             }
-        }
-
-        public GitLabHttpFacade(RequestsJsonSerializer jsonSerializer, HttpClient httpClient)
-        {
-            _httpClient = httpClient;
-            Setup(jsonSerializer);
         }
 
         private void Setup(RequestsJsonSerializer jsonSerializer)
