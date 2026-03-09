@@ -9,12 +9,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - run: dotnet tool install -g dotnet-format
-
-      - name: Add dotnet-format problem matcher
-        uses: xt0rted/dotnet-format-problem-matcher@v1
-
       - name: Run dotnet format
-        uses: xt0rted/dotnet-format@v1
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          dotnet format --verify-no-changes
