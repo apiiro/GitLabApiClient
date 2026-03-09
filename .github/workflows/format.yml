@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Format
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - run: dotnet tool install -g dotnet-format
 
