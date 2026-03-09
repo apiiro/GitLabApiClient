@@ -96,7 +96,7 @@ namespace GitLabApiClient.Test
             });
 
             Func<Task<MergeRequest>> acceptAction = () =>
-                _sut.AcceptAsync(GitLabApiHelper.TestProjectTextId, createdMergeRequest.Iid, new AcceptMergeRequest());
+                _sut.AcceptAsync(GitLabApiHelper.TestProjectTextId, (int)createdMergeRequest.Iid, new AcceptMergeRequest());
 
             acceptAction.Should().Throw<GitLabException>().
                 WithMessage("{\"message\":\"405 Method Not Allowed\"}").
@@ -124,7 +124,7 @@ namespace GitLabApiClient.Test
         {
             var mergeRequests = await _sut.GetAsync(GitLabApiHelper.TestProjectId);
             await Task.WhenAll(mergeRequests.Select(
-                m => _sut.DeleteAsync(GitLabApiHelper.TestProjectId, m.Iid)));
+                m => _sut.DeleteAsync(GitLabApiHelper.TestProjectId, (int)m.Iid)));
         }
     }
 }

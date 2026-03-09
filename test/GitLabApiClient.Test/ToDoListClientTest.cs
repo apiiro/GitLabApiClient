@@ -140,7 +140,7 @@ namespace GitLabApiClient.Test
         {
             var mergeRequests = await mergeRequestsClient.GetAsync(GitLabApiHelper.TestProjectId);
             await Task.WhenAll(mergeRequests.Select(
-                m => mergeRequestsClient.DeleteAsync(GitLabApiHelper.TestProjectId, m.Iid)));
+                m => mergeRequestsClient.DeleteAsync(GitLabApiHelper.TestProjectId, (int)m.Iid)));
         }
     }
 }
