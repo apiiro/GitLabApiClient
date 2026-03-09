@@ -40,7 +40,9 @@ namespace GitLabApiClient
         }
 
         /// <summary>
-        /// Create new webhook
+        /// Create new webhook.
+        /// Some GitLab versions return a JSON array from POST /projects/:id/hooks
+        /// instead of a single object. We deserialize as JToken to handle both formats.
         /// </summary>
         /// <param name="projectId">The ID, path or <see cref="Project"/> of the project.</param>
         /// <param name="request">Create hook request.</param>
