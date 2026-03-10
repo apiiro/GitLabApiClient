@@ -21,7 +21,7 @@ namespace GitLabApiClient.Test
     public class GroupsClientTest
     {
         private readonly List<int> _groupIdsToClean = new List<int>();
-        private List<int> MilestoneIdsToClean { get; } = new List<int>();
+        private List<long> MilestoneIdsToClean { get; } = new List<long>();
         private List<string> VariableIdsToClean { get; } = new List<string>();
 
         private readonly GroupsClient _sut = new GroupsClient(
@@ -86,7 +86,7 @@ namespace GitLabApiClient.Test
 
             //act
             var milestones = await _sut.GetMilestonesAsync(TestGroupId);
-            var milestone = await _sut.GetMilestoneAsync(TestGroupId, createdMilestone.Id);
+            var milestone = await _sut.GetMilestoneAsync(TestGroupId, (int)createdMilestone.Id);
 
             //assert
             milestones.Should().NotBeEmpty();
@@ -207,7 +207,7 @@ namespace GitLabApiClient.Test
             MilestoneIdsToClean.Add(createdMilestone.Id);
 
             //act
-            var updatedMilestone = await _sut.UpdateMilestoneAsync(TestGroupTextId, createdMilestone.Id, new UpdateGroupMilestoneRequest()
+            var updatedMilestone = await _sut.UpdateMilestoneAsync(TestGroupTextId, (int)createdMilestone.Id, new UpdateGroupMilestoneRequest()
             {
                 Title = "milestone22",
                 StartDate = "2018-11-05",
@@ -237,7 +237,7 @@ namespace GitLabApiClient.Test
             MilestoneIdsToClean.Add(createdMilestone.Id);
 
             //act
-            var updatedMilestone = await _sut.UpdateMilestoneAsync(TestGroupTextId, createdMilestone.Id, new UpdateGroupMilestoneRequest()
+            var updatedMilestone = await _sut.UpdateMilestoneAsync(TestGroupTextId, (int)createdMilestone.Id, new UpdateGroupMilestoneRequest()
             {
                 State = UpdatedMilestoneState.Close
             });
@@ -353,8 +353,8 @@ namespace GitLabApiClient.Test
 
         private async Task CleanupGroups()
         {
-            foreach (int milestoneId in MilestoneIdsToClean)
-                await _sut.DeleteMilestoneAsync(TestGroupId, milestoneId);
+            foreach (long milestoneId in MilestoneIdsToClean)
+                await _sut.DeleteMilestoneAsync(TestGroupId, (int)milestoneId);
 
             foreach (int groupId in _groupIdsToClean)
                 await _sut.DeleteAsync(groupId.ToString());

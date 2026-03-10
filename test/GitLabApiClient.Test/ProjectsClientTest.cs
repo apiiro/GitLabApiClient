@@ -22,7 +22,7 @@ namespace GitLabApiClient.Test
     public class ProjectsClientTest : IAsyncLifetime
     {
         private List<int> ProjectIdsToClean { get; } = new List<int>();
-        private List<int> MilestoneIdsToClean { get; } = new List<int>();
+        private List<long> MilestoneIdsToClean { get; } = new List<long>();
         private List<string> VariableIdsToClean { get; } = new List<string>();
 
         private readonly ProjectsClient _sut = new ProjectsClient(
@@ -76,7 +76,7 @@ namespace GitLabApiClient.Test
 
             //act
             var milestones = await _sut.GetMilestonesAsync(GitLabApiHelper.TestProjectId);
-            var milestone = await _sut.GetMilestoneAsync(GitLabApiHelper.TestProjectId, createdMilestone.Id);
+            var milestone = await _sut.GetMilestoneAsync(GitLabApiHelper.TestProjectId, (int)createdMilestone.Id);
 
             //assert
             milestones.Should().NotBeEmpty();
@@ -286,7 +286,7 @@ namespace GitLabApiClient.Test
             MilestoneIdsToClean.Add(createdMilestone.Id);
 
             //act
-            var updatedMilestone = await _sut.UpdateMilestoneAsync(GitLabApiHelper.TestProjectTextId, createdMilestone.Id, new UpdateProjectMilestoneRequest()
+            var updatedMilestone = await _sut.UpdateMilestoneAsync(GitLabApiHelper.TestProjectTextId, (int)createdMilestone.Id, new UpdateProjectMilestoneRequest()
             {
                 Title = "milestone23",
                 StartDate = "2018-11-05",
@@ -353,7 +353,7 @@ namespace GitLabApiClient.Test
             MilestoneIdsToClean.Add(createdMilestone.Id);
 
             //act
-            var updatedMilestone = await _sut.UpdateMilestoneAsync(GitLabApiHelper.TestProjectTextId, createdMilestone.Id, new UpdateProjectMilestoneRequest()
+            var updatedMilestone = await _sut.UpdateMilestoneAsync(GitLabApiHelper.TestProjectTextId, (int)createdMilestone.Id, new UpdateProjectMilestoneRequest()
             {
                 State = UpdatedMilestoneState.Close
             });
@@ -411,8 +411,8 @@ namespace GitLabApiClient.Test
         private async Task CleanupProjects()
         {
 
-            foreach (int milestoneId in MilestoneIdsToClean)
-                await _sut.DeleteMilestoneAsync(GitLabApiHelper.TestProjectId, milestoneId);
+            foreach (long milestoneId in MilestoneIdsToClean)
+                await _sut.DeleteMilestoneAsync(GitLabApiHelper.TestProjectId, (int)milestoneId);
 
             foreach (int projectId in ProjectIdsToClean)
                 await _sut.DeleteAsync(projectId);

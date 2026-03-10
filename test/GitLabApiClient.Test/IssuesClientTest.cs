@@ -37,7 +37,7 @@ namespace GitLabApiClient.Test
             });
 
             //act
-            var updatedIssue = await _sut.UpdateAsync(TestProjectTextId, createdIssue.Iid, new UpdateIssueRequest()
+            var updatedIssue = await _sut.UpdateAsync(TestProjectTextId, (int)createdIssue.Iid, new UpdateIssueRequest()
             {
                 Assignees = new List<int> { 11 },
                 Confidential = false,
@@ -63,7 +63,7 @@ namespace GitLabApiClient.Test
             var createdIssue = await _sut.CreateAsync(TestProjectTextId, new CreateIssueRequest("Title1"));
 
             //act
-            var updatedIssue = await _sut.UpdateAsync(TestProjectTextId, createdIssue.Iid, new UpdateIssueRequest()
+            var updatedIssue = await _sut.UpdateAsync(TestProjectTextId, (int)createdIssue.Iid, new UpdateIssueRequest()
             {
                 State = UpdatedIssueState.Close
             });
@@ -104,8 +104,8 @@ namespace GitLabApiClient.Test
             });
 
             //act
-            var issueById = await _sut.GetAsync(TestProjectId, issue.Iid);
-            var issueByProjectId = (await _sut.GetAllAsync(options: o => o.IssueIds = new[] { issue.Iid })).FirstOrDefault(i => i.Title == title);
+            var issueById = await _sut.GetAsync(TestProjectId, (int)issue.Iid);
+            var issueByProjectId = (await _sut.GetAllAsync(options: o => o.IssueIds = new[] { (int)issue.Iid })).FirstOrDefault(i => i.Title == title);
             var ownedIssue = (await _sut.GetAllAsync(options: o => o.Scope = Scope.CreatedByMe)).FirstOrDefault(i => i.Title == title);
 
             //assert
@@ -136,7 +136,7 @@ namespace GitLabApiClient.Test
                 CreatedAt = DateTime.Now
             });
             var issueNotes = (await _sut.GetNotesAsync(TestProjectId, issue.Iid)).FirstOrDefault(i => i.Body == body);
-            var issueNote = await _sut.GetNoteAsync(TestProjectId, issue.Iid, note.Id);
+            var issueNote = await _sut.GetNoteAsync(TestProjectId, (int)issue.Iid, (int)note.Id);
 
             //assert
             note.Should().Match<Note>(n =>
@@ -157,7 +157,7 @@ namespace GitLabApiClient.Test
             var createdIssueNote = await _sut.CreateNoteAsync(TestProjectTextId, createdIssue.Iid, new CreateIssueNoteRequest("comment2"));
 
             //act
-            var updatedIssueNote = await _sut.UpdateNoteAsync(TestProjectTextId, createdIssue.Iid, createdIssueNote.Id, new UpdateIssueNoteRequest("comment22"));
+            var updatedIssueNote = await _sut.UpdateNoteAsync(TestProjectTextId, (int)createdIssue.Iid, (int)createdIssueNote.Id, new UpdateIssueNoteRequest("comment22"));
 
             //assert
             updatedIssueNote.Should().Match<Note>(n =>
