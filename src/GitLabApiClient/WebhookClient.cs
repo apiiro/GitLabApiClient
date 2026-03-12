@@ -1,13 +1,10 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using GitLabApiClient.Internal.Http;
 using GitLabApiClient.Internal.Paths;
 using GitLabApiClient.Models.Projects.Responses;
 using GitLabApiClient.Models.Webhooks.Requests;
 using GitLabApiClient.Models.Webhooks.Responses;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace GitLabApiClient
 {
@@ -40,23 +37,13 @@ namespace GitLabApiClient
         }
 
         /// <summary>
-        /// Create new webhook.
-        /// Some GitLab versions return a JSON array from POST /projects/:id/hooks
-        /// instead of a single object. We deserialize as JToken to handle both formats.
+        /// Create new webhook
         /// </summary>
         /// <param name="projectId">The ID, path or <see cref="Project"/> of the project.</param>
         /// <param name="request">Create hook request.</param>
         /// <returns>newly created hook</returns>
-        public async Task<Webhook> CreateAsync(ProjectId projectId, CreateWebhookRequest request)
-        {
-            var token = await _httpFacade.Post<JToken>($"projects/{projectId}/hooks", request);
-            return token switch
-            {
-                JArray array => array.FirstOrDefault()?.ToObject<Webhook>(),
-                JObject obj => obj.ToObject<Webhook>(),
-                _ => null
-            };
-        }
+        public async Task<Webhook> CreateAsync(ProjectId projectId, CreateWebhookRequest request) =>
+            await _httpFacade.Post<Webhook>($"projects/{projectId}/hooks", request);
 
         /// <summary>
         /// Delete a webhook
